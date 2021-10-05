@@ -8,12 +8,10 @@ void	send_bit(int pid, char *message)
 	if (message[i])
 	{
 		kill(pid, SIGUSR1);
-		write(1, "1", 1);
 	}
 	else
 	{
 		kill(pid, SIGUSR2);
-		write(1, "0", 1);
 	}
 }
 
@@ -21,7 +19,7 @@ int	main(int ac, char **av)
 {
 	int	pid;
 
-	if (ac != 3 || !ft_strchr_ps(av[1]))
+	if (ac != 3)
 	{
 		ft_putstr_fd("Use the following: [PID] [MESSAGE]\n", 1);
 		return (1);
