@@ -3,15 +3,27 @@
 void	send_bit(int pid, char *message)
 {
 	int	i;
+	int j;
 
 	i = 0;
-	if (message[i])
+	while (1)
 	{
-		kill(pid, SIGUSR1);
-	}
-	else
-	{
-		kill(pid, SIGUSR2);
+		j = 128;
+		while (j != 0)
+		{
+			usleep(120);
+			if (message[i] & j)
+				kill(pid, SIGUSR2);
+			else
+				kill(pid, SIGUSR1);
+			j = j >> 1;
+		}
+		if (message[i] == '\0')
+		{
+			ft_putstr_fd("Message was send\n", 1);
+			break ;
+		}
+		i++;
 	}
 }
 
@@ -22,9 +34,10 @@ int	main(int ac, char **av)
 	if (ac != 3)
 	{
 		ft_putstr_fd("Use the following: [PID] [MESSAGE]\n", 1);
-		return (1);
 	}
-	pid = ft_atoi(av[1]);
-	send_bit(pid, av[2]);
-	return 0;
+	else
+	{
+		pid = ft_atoi(av[1]);
+		send_bit(pid, av[2]);
+	}
 }

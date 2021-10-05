@@ -2,10 +2,33 @@
 
 void	handler(int bit)
 {
+	static int	c;
+	static int	i;
+	static int	j;
+
+	if (j == 0)
+		j = 128;
 	if (bit == SIGUSR1)
-		write(1, "1", 1);
-	if (bit == SIGUSR2)
-		write(1, "2", 1);
+	{
+		j /= 2;
+		i++;
+	}
+	else if (bit == SIGUSR2)
+	{
+		c += j;
+		j /= 2;
+		i++;
+	}
+	if (i == 8)
+	{
+		if (c != 0)
+			write(1, &c, 1);
+		else
+			write(1, "\n", 1);
+		i = 0;
+		j = 0;
+		c = 0;
+	}
 }
 
 int main(void)
