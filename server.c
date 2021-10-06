@@ -1,5 +1,13 @@
 #include "includes/minitalk.h"
 
+void	printer(int c)
+{
+	if (c != 0)
+		write(1, &c, 1);
+	else
+		write(1, "\n", 1);
+}
+
 void	handler(int bit)
 {
 	static int	c;
@@ -21,17 +29,14 @@ void	handler(int bit)
 	}
 	if (i == 8)
 	{
-		if (c != 0)
-			write(1, &c, 1);
-		else
-			write(1, "\n", 1);
+		printer(c);
 		i = 0;
 		j = 0;
 		c = 0;
 	}
 }
 
-int main(void)
+int	main(void)
 {
 	ft_putstr_fd("server pid: ", 1);
 	ft_putnbr_fd(getpid(), 1);

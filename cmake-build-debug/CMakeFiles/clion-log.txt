@@ -1,1 +1,0 @@
-CMakeLists.txt not found in /Users/mrudge/Desktop/minitalk Select CMakeLists.txt

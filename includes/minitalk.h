@@ -11,5 +11,4 @@
 
 int	ft_strchr_ps(char *str);
 
-
 #endif //MINITALK_MINITALK_H

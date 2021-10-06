@@ -3,7 +3,7 @@
 void	send_bit(int pid, char *message)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	while (1)
